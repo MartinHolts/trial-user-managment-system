@@ -109,6 +109,7 @@ function deleteUser(userId) {
 }
 
 // Edit a user
+const overlay = document.getElementById("overlay");
 const editForm = document.getElementById("edit-user-form");
 const editName = document.getElementById("edit-name");
 const editUsername = document.getElementById("edit-username");
@@ -138,6 +139,7 @@ function showAndFillEditForm(userId) {
 	fetch(`http://localhost:3000/users/${userId}`)
 		.then(response => response.json())
 		.then(user => {
+			overlay.style.display = "block";
 			editForm.style.display = "block";
 
 			editName.value = user.name;
@@ -170,4 +172,5 @@ function hideAndEmptyEditForm() {
 	editForm.setAttribute('data-id', "");
 
 	editForm.style.display = "none";
+	overlay.style.display = "none";
 }
