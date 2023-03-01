@@ -17,12 +17,12 @@ This command starts json-server and watches the db.json file for changes.
 To compile SCSS code I used SASS.
 
 ### To run SCSS code:
-1. Install SASS globally using npm. Open your terminal or command prompt and run the following command:
+1. Install SASS globally using npm. Open your terminal or command prompt and run the following command:<br />
 npm install -g sass
 
 This will install SASS globally on your system.
 
-2. Start SASS by running the following command in your project directory:
+2. Start SASS by running the following command in your project directory:<br />
 sass --watch scss:css
 
 3. Sass now compiles all the code in scss folder into css folder when changes are made.
