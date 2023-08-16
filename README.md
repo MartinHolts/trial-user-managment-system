@@ -1,4 +1,4 @@
-# Front-End-trial-work
+# Frontend-Trial-Work
 
 ## I ran json file in localhost with json-server.
 ### To run json server:
