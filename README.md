@@ -2,6 +2,7 @@
 
 ## I ran json file in localhost with json-server.
 ### To run json server:
+
 1. Install json-server globally using npm. Open your terminal or command prompt and run the following command:<br />
 npm install -g json-server
 
@@ -14,8 +15,7 @@ This command starts json-server and watches the db.json file for changes.
 
 3. You can now access the data from the users endpoint by navigating to http://localhost:3000/users in your browser. This should display the JSON data you defined in db.json.
 
-To compile SCSS code I used SASS.
-
+## To compile SCSS code I used SASS.
 ### To run SCSS code:
 1. Install SASS globally using npm. Open your terminal or command prompt and run the following command:<br />
 npm install -g sass
