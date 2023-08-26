@@ -3,17 +3,18 @@
 ## I ran json file in localhost with json-server.
 ### To run json server:
 
-1.&nbsp; Install json-server globally using npm. Open your terminal or command prompt and run the following command:<br />
+1.&nbsp; Install json-server globally using npm. Open your terminal or command prompt and run the following command:
 npm install -g json-server
-
 ```bash
 npm install -g json-server
 ```
 
 This will install json-server globally on your system.
 
-2.&nbsp; Start json-server by running the following command in your project directory:<br />
+2.&nbsp; Start json-server by running the following command in your project directory:
+```bash
 json-server --watch db.json
+```
 
 This command starts json-server and watches the db.json file for changes.
 
@@ -21,12 +22,16 @@ This command starts json-server and watches the db.json file for changes.
 
 ## To compile SCSS code I used SASS.
 ### To run SCSS code:
-1.&nbsp; Install SASS globally using npm. Open your terminal or command prompt and run the following command:<br />
+1.&nbsp; Install SASS globally using npm. Open your terminal or command prompt and run the following command:
+```bash
 npm install -g sass
+```
 
 This will install SASS globally on your system.
 
-2.&nbsp; Start SASS by running the following command in your project directory:<br />
+2.&nbsp; Start SASS by running the following command in your project directory:
+```bash
 sass --watch scss:css
+```
 
 3.&nbsp; Sass now compiles all the code in scss folder into css folder when changes are made.
