@@ -1,7 +1,7 @@
 # Frontend-Trial-Work
 
-## Running JSON Server Locally
-### To Run JSON Server:
+## Running `json-server` Locally
+### To Run `json-server`:
 
 1.&nbsp; Install `json-server` globally using npm:
 ```bash
@@ -17,8 +17,8 @@ This command initiates the `json-server` and watches the `db.json` file for chan
 
 3.&nbsp; Access the data from the users endpoint by navigating to http://localhost:3000/users in your browser. This should display the JSON data you defined in `db.json`.
 
-## Compiling SCSS Code Using SASS
-### To run SCSS Code:
+## Compiling `SCSS` Code Using `SASS`
+### To run `SCSS` Code:
 1.&nbsp; Install `sass` globally using npm:
 ```bash
 npm install -g sass
