@@ -6,6 +6,16 @@
 1.&nbsp; Install json-server globally using npm. Open your terminal or command prompt and run the following command:<br />
 npm install -g json-server
 
+```bash
+npm install -g json-server
+```
+
+<pre>
+```bash
+npm install -g json-server
+```
+</pre>
+
 This will install json-server globally on your system.
 
 2.&nbsp; Start json-server by running the following command in your project directory:<br />
