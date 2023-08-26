@@ -19,16 +19,16 @@ This command initiates the `json-server` and watches the `db.json` file for chan
 
 ## Compiling `SCSS` Code Using `SASS`
 ### To run `SCSS` Code:
-1.&nbsp; Install `sass` globally using npm:
+1.&nbsp; Install `SASS` globally using npm:
 ```bash
 npm install -g sass
 ```
-This command will globally install `sass` on your system.
+This command will globally install `SASS` on your system.
 
-2.&nbsp; Start compiling `scss` to `css` by running the following command in your project directory:
+2.&nbsp; Start compiling `SCSS` to `CSS` by running the following command in your project directory:
 ```bash
 sass --watch scss:css
 ```
-Sass will automatically compile the code in the `scss` folder into the `css` folder when changes are made.
+Sass will automatically compile the code in the `SCSS` folder into the `CSS` folder when changes are made.
 
-3.&nbsp; Now, your `scss` code is compiled into `css` whenever changes are made in the `scss` folder.
+3.&nbsp; Now, your `SCSS` code is compiled into `CSS` whenever changes are made in the `SCSS` folder.
