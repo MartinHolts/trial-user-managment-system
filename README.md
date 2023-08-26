@@ -15,7 +15,7 @@ json-server --watch db.json
 ```
 This command initiates the `json-server` and watches the `db.json` file for changes.
 
-3.&nbsp; Access the data from the users endpoint by navigating to http://localhost:3000/users in your browser. This should display the `JSON` data you defined in `db.json`.
+3.&nbsp; Access the data from the users endpoint by navigating to http://localhost:3000/users in your browser. This should display the JSON data you defined in `db.json`.
 
 ## Compiling `SCSS` Code Using `SASS`
 ### To run `SCSS` Code:
