@@ -1,37 +1,34 @@
 # Frontend-Trial-Work
 
-## I ran json file in localhost with json-server.
-### To run json server:
+## Running JSON Server Locally
+### To Run JSON Server:
 
-1.&nbsp; Install json-server globally using npm. Open your terminal or command prompt and run the following command:
-npm install -g json-server
+1.&nbsp; Install `json-server` globally using npm:
 ```bash
 npm install -g json-server
 ```
+This command will globally install `json-server` on your system.
 
-This will install json-server globally on your system.
-
-2.&nbsp; Start json-server by running the following command in your project directory:
+2.&nbsp; Start the `json-server` by running the following command in your project directory:
 ```bash
 json-server --watch db.json
 ```
+This command initiates the `json-server` and watches the `db.json` file for changes.
 
-This command starts json-server and watches the db.json file for changes.
+3.&nbsp; Access the data from the users endpoint by navigating to http://localhost:3000/users in your browser. This should display the JSON data you defined in `db.json`.
 
-3.&nbsp; You can now access the data from the users endpoint by navigating to http://localhost:3000/users in your browser. This should display the JSON data you defined in db.json.
-
-## To compile SCSS code I used SASS.
-### To run SCSS code:
-1.&nbsp; Install SASS globally using npm. Open your terminal or command prompt and run the following command:
+## Compiling SCSS Code Using SASS
+### To run SCSS Code:
+1.&nbsp; Install `sass` globally using npm:
 ```bash
 npm install -g sass
 ```
+This command will globally install `sass` on your system.
 
-This will install SASS globally on your system.
-
-2.&nbsp; Start SASS by running the following command in your project directory:
+2.&nbsp; Start compiling SCSS to CSS by running the following command in your project directory:
 ```bash
 sass --watch scss:css
 ```
+Sass will automatically compile the code in the `scss` folder into the `css` folder when changes are made.
 
-3.&nbsp; Sass now compiles all the code in scss folder into css folder when changes are made.
+3.&nbsp; Now, your SCSS code is compiled into CSS whenever changes are made in the `scss` folder.
