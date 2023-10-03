@@ -32,3 +32,4 @@ sass --watch scss:css
 Sass will automatically compile the code in the `SCSS` folder into the `CSS` folder when changes are made.
 
 3.&nbsp; Now, your `SCSS` code is compiled into `CSS` whenever changes are made in the `SCSS` folder.
+ 
