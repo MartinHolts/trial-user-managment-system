@@ -19,6 +19,8 @@ This command initiates the `json-server` and watches the `db.json` file for chan
 
 4.&nbsp; Access the data from the users endpoint by navigating to http://localhost:3000/users in your browser. This should display the `JSON` data you defined in `db.json`.
 
+5.&nbsp; Access the website by navigating to http://localhost:3000 in your browser.
+
 ## Compiling `SCSS` Code Using `SASS`
 ### To run `SCSS` Code
 1.&nbsp; Ensure you have npm installed on your system. If not, you can install it from [https://www.npmjs.com/get-npm](https://nodejs.org/en).
