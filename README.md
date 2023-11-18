@@ -13,7 +13,7 @@ This command will globally install `json-server` on your system.
 
 3.&nbsp; Start the `json-server` by running the following command in your project directory:
 ```bash
-json-server --watch db.json
+json-server --watch db.json .
 ```
 This command initiates the `json-server` and watches the `db.json` file for changes.
 
