@@ -19,7 +19,7 @@ This command initiates the `json-server` and watches the `db.json` file for chan
 
 4.&nbsp; Access the data from the users endpoint by navigating to http://localhost:3000/users in your browser. This should display the `JSON` data you defined in `db.json`.
 
-5.&nbsp; Access the website by opening index.html file in your browser.
+5.&nbsp; Access the website by opening `index.html` file in your browser.
 
 ## Compiling `SCSS` Code Using `SASS`
 ### To run `SCSS` Code
