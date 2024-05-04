@@ -20,14 +20,14 @@ h1 {
 /* Search bar styles */
 #search {
   display: block;
+  text-align: center;
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
   margin-bottom: 20px;
-  padding: 10px;
-  text-align: center;
   border: none;
   border-radius: 5px;
+  padding: 10px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -127,7 +127,7 @@ h1 {
   background-color: #555;
 }
 #edit-user-form button[type=submit] {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   transition: background-color 0.3s ease;
 }
 #edit-user-form button[type=submit]:hover {
@@ -164,7 +164,7 @@ h1 {
   font-size: 16px;
   cursor: pointer;
   color: white;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   transition: background-color 0.3s ease;
 }
 #add-user-form button[type=submit]:hover {
