@@ -21,17 +21,6 @@ h1 {
   padding: 20px;
 }
 
-#overlay-for-edit-user-form {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1; /* make sure this element is above other elements, but under #edit-user-form */
-}
-
 /* Search bar styles */
 #search {
   padding: 10px;
@@ -79,8 +68,20 @@ h1 {
   background-color: #555;
 }
 
-/* Edit form styles */
+/* Overlay styles */
 #overlay-for-edit-user-form {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1; /* make sure this element is above other elements, but under #edit-user-form */
+}
+
+/* Edit form styles */
+#edit-user-form {
   max-width: 400px;
   border-radius: 5px;
   padding: 20px;
@@ -91,15 +92,15 @@ h1 {
   z-index: 2; /* make sure this element is above other elements. Including overlay-for-edit-user-form element. */
   background-color: #fff;
 }
-#overlay-for-edit-user-form h2 {
+#edit-user-form h2 {
   margin-bottom: 15px;
 }
-#overlay-for-edit-user-form label {
+#edit-user-form label {
   display: block;
   margin-bottom: 10px;
   font-weight: bold;
 }
-#overlay-for-edit-user-form input {
+#edit-user-form input {
   width: 100%;
   margin-bottom: 15px;
   padding: 10px;
@@ -110,24 +111,24 @@ h1 {
   background-color: #f7f7f7;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
-#overlay-for-edit-user-form button {
+#edit-user-form button {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   color: white;
 }
-#overlay-for-edit-user-form button[type=button] {
+#edit-user-form button[type=button] {
   background-color: #333;
 }
-#overlay-for-edit-user-form button[type=button]:hover {
+#edit-user-form button[type=button]:hover {
   background-color: #555;
 }
-#overlay-for-edit-user-form button[type=submit] {
+#edit-user-form button[type=submit] {
   background-color: #4CAF50;
   transition: background-color 0.3s ease;
 }
-#overlay-for-edit-user-form button[type=submit]:hover {
+#edit-user-form button[type=submit]:hover {
   background-color: #3e8e41;
 }
 
