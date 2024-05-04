@@ -152,7 +152,7 @@ function showAndFillEditForm(userId) {
 			editName.value = user.name;
 			editUsername.value = user.username;
 			editEmail.value = user.email;
-			editPhone.value = user.phone;
+			editPhone.value = user.phone;	
 			editWebsite.value = user.website;
 			editForm.setAttribute("data-id", user.id);
 		});
