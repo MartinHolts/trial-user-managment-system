@@ -116,7 +116,7 @@ function deleteUser(userId) {
 }
 
 // Edit a user
-const overlay = document.getElementById("overlay");
+const overlay = document.getElementById("overlay-for-edit-user-form");
 const editForm = document.getElementById("edit-user-form");
 const editName = document.getElementById("edit-name");
 const editUsername = document.getElementById("edit-username");

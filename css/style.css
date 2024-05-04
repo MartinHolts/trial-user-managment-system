@@ -21,7 +21,7 @@ h1 {
   padding: 20px;
 }
 
-#overlay {
+#overlay-for-edit-user-form {
   display: none;
   position: fixed;
   top: 0;
@@ -29,7 +29,7 @@ h1 {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1; /* make sure the overlay is above other elements, but under #edit-user-form */
+  z-index: 1; /* make sure this element is above other elements, but under #edit-user-form */
 }
 
 /* Search bar styles */
@@ -80,7 +80,7 @@ h1 {
 }
 
 /* Edit form styles */
-#edit-user-form {
+#overlay-for-edit-user-form {
   max-width: 400px;
   border-radius: 5px;
   padding: 20px;
@@ -88,18 +88,18 @@ h1 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 2; /* make sure the overlay is above other elements. Including overlay element. */
+  z-index: 2; /* make sure this element is above other elements. Including overlay-for-edit-user-form element. */
   background-color: #fff;
 }
-#edit-user-form h2 {
+#overlay-for-edit-user-form h2 {
   margin-bottom: 15px;
 }
-#edit-user-form label {
+#overlay-for-edit-user-form label {
   display: block;
   margin-bottom: 10px;
   font-weight: bold;
 }
-#edit-user-form input {
+#overlay-for-edit-user-form input {
   width: 100%;
   margin-bottom: 15px;
   padding: 10px;
@@ -110,24 +110,24 @@ h1 {
   background-color: #f7f7f7;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
-#edit-user-form button {
+#overlay-for-edit-user-form button {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   color: white;
 }
-#edit-user-form button[type=button] {
+#overlay-for-edit-user-form button[type=button] {
   background-color: #333;
 }
-#edit-user-form button[type=button]:hover {
+#overlay-for-edit-user-form button[type=button]:hover {
   background-color: #555;
 }
-#edit-user-form button[type=submit] {
+#overlay-for-edit-user-form button[type=submit] {
   background-color: #4CAF50;
   transition: background-color 0.3s ease;
 }
-#edit-user-form button[type=submit]:hover {
+#overlay-for-edit-user-form button[type=submit]:hover {
   background-color: #3e8e41;
 }
 
