@@ -1,172 +1,173 @@
 /* Global styles */
 * {
-	box-sizing: border-box;
-	padding: 0;
-	margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-	padding: 20px;
-	color: #333;
-	background-color: #f7f7f7;
-	font-family: Arial, sans-serif;
+  padding: 20px;
+  color: #333;
+  background-color: #f7f7f7;
+  font-family: Arial, sans-serif;
 }
 
 h1 {
-	margin-bottom: 20px;
-	text-align: center;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 /* Search bar styles */
 #search {
-	display: block;
-	width: 100%;
-	max-width: 800px;
-	padding: 10px;
-	margin: 0 auto;
-	margin-bottom: 20px;
-	border: none;
-	border-radius: 5px;
-	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-	text-align: center;
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  padding: 10px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 /* User list styles */
 #user-list {
-	max-width: 800px;
-	margin: 0 auto;
-	list-style: none;
+  max-width: 800px;
+  margin: 0 auto;
+  list-style: none;
 }
 #user-list li {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	width: 100%;
-	padding: 20px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	background-color: #fff;
-	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 #user-list li h2 {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 #user-list li p {
-	margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 #user-list li button {
-	padding: 10px 20px;
-	margin-top: 10px;
-	border: none;
-	border-radius: 5px;
-	color: #fff;
-	background-color: #333;
-	cursor: pointer;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #333;
+  cursor: pointer;
 }
 #user-list li button:hover {
-	background-color: #555;
+  background-color: #555;
 }
 #user-list li:not(:last-of-type) {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 /* Overlay styles */
 #overlay-for-edit-user-form {
-	position: fixed;
-	z-index: 1; /* make sure this element is above other elements, but under #edit-user-form */
-	top: 0;
-	left: 0;
-	display: none;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  z-index: 1; /* make sure this element is above other elements, but under #edit-user-form */
+  top: 0;
+  left: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Edit form styles */
 #edit-user-form {
-	position: fixed;
-	z-index: 2; /* make sure this element is above other elements. Including overlay-for-edit-user-form element. */
-	top: 50%;
-	left: 50%;
-	max-width: 400px;
-	padding: 20px;
-	border-radius: 5px;
-	background-color: #fff;
-	transform: translate(-50%, -50%);
+  position: fixed;
+  z-index: 2; /* make sure this element is above other elements. Including overlay-for-edit-user-form element. */
+  top: 50%;
+  left: 50%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #fff;
+  transform: translate(-50%, -50%);
 }
 #edit-user-form h2 {
-	margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 #edit-user-form label {
-	display: block;
-	margin-bottom: 10px;
-	font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
 }
 #edit-user-form input {
-	width: 100%;
-	padding: 10px;
-	margin-bottom: 15px;
-	border: none;
-	border-radius: 5px;
-	color: #333;
-	background-color: #f7f7f7;
-	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-	font-size: 16px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 5px;
+  color: #333;
+  background-color: #f7f7f7;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
 }
 #edit-user-form button {
-	padding: 10px 20px;
-	border: none;
-	border-radius: 5px;
-	color: white;
-	cursor: pointer;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
 }
 #edit-user-form button[type=button] {
-	background-color: #333;
+  background-color: #333;
 }
 #edit-user-form button[type=button]:hover {
-	background-color: #555;
+  background-color: #555;
 }
 #edit-user-form button[type=submit] {
-	background-color: #4caf50;
-	transition: background-color 0.3s ease;
+  background-color: #4caf50;
+  transition: background-color 0.3s ease;
 }
 #edit-user-form button[type=submit]:hover {
-	background-color: #3e8e41;
+  background-color: #3e8e41;
 }
 
 /* Add user form styles */
 #add-user-form {
-	max-width: 440px;
-	margin: 0 auto;
-	margin-top: 20px;
-	text-align: center;
+  max-width: 440px;
+  margin: 0 auto;
+  margin-top: 20px;
+  text-align: center;
 }
 #add-user-form label {
-	display: block;
-	margin-bottom: 10px;
-	font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
 }
 #add-user-form input {
-	width: 100%;
-	padding: 10px;
-	margin-bottom: 15px;
-	border: none;
-	border-radius: 5px;
-	color: #333;
-	background-color: #f2f2f2;
-	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-	font-size: 16px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 5px;
+  color: #333;
+  background-color: #f2f2f2;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
 }
 #add-user-form button[type=submit] {
-	padding: 10px 20px;
-	border: none;
-	border-radius: 5px;
-	color: white;
-	background-color: #4caf50;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
-	font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: #4caf50;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
 }
 #add-user-form button[type=submit]:hover {
-	background-color: #3e8e41;
+  background-color: #3e8e41;
 }
+
+/*# sourceMappingURL=style.css.map */
