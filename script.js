@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", init);
+
+function init() {}
+
 const userList = document.getElementById("user-list");
 const search = document.getElementById("search");
 
