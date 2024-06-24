@@ -44,3 +44,4 @@ Sass will automatically compile the code in the `SCSS` folder into the `CSS` fol
 
 ## Screenshot of the website with edit window open.
 ![With edit open](https://github.com/MartinHolts/Frontend-Trial-Work/assets/16961661/f9609ca4-4f8a-43fc-8f83-7db81a9f7998)
+ 
