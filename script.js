@@ -1,6 +1,49 @@
+// init
+// addeventlistener for search() input
+// run displayusers()
+// addeventlistener for adduser() button
+//
+//
+// function search
+//   filter users
+//   call displayusers
+//
+// function displayusers()
+//   subfunction getusers()
+//     gets users from database
+//     calls renderusers(users)
+
+//   subfunction renderusers(users)
+//     for each user innerhtml and add event listener for edit and delete buttons
+//	   edit button calls edituser
+//	   delete button calls deleteuser
+
+//   subfunction edituser()
+//     subfunction displayuserfields
+//       displays all userfields and save and delete button
+//		 save calls saveuser()
+//     subfunction saveuser
+//	     changes user data in database and calls displayusers also calls canseledit function
+//     subfunction canceledit
+//	     refreshes fields and hides popup
+
+//   subfunction deleteuser
+//     deletes user from database and calls displayusers
+//     
+// function adduser
+//   gets info from fields and adds user to database then clears fields.
+//     
+//     
+//
+
 document.addEventListener("DOMContentLoaded", init);
 
-function init() {}
+function init() {
+	const searchElement = document.querySelector("#search");
+	if (searchElement) {
+		searchElement.addEventListener("click", search);
+	}
+}
 
 const userList = document.getElementById("user-list");
 const search = document.getElementById("search");
