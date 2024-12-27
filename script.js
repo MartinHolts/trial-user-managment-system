@@ -1,77 +1,53 @@
-// init
-// addeventlistener for search() input
-// run displayusers()
-// addeventlistener for adduser() button
-//
-//
-// function search
-//   filter users
-//   call displayusers
-//
-// function displayusers()
-//   subfunction getusers()
-//     gets users from database
-//     calls renderusers(users)
-
-//   subfunction renderusers(users)
-//     for each user innerhtml and add event listener for edit and delete buttons
-//	   edit button calls edituser
-//	   delete button calls deleteuser
-
-//   subfunction edituser()
-//     subfunction displayuserfields
-//       displays all userfields and save and delete button
-//		 save calls saveuser()
-//     subfunction saveuser
-//	     changes user data in database and calls displayusers also calls canseledit function
-//     subfunction canceledit
-//	     refreshes fields and hides popup
-
-//   subfunction deleteuser
-//     deletes user from database and calls displayusers
-//     
-// function adduser
-//   gets info from fields and adds user to database then clears fields.
-//     
-//     
-//
+// SEARCH, edit user(save, cancel), delete user, add user. 6
 
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
 	const searchElement = document.querySelector("#search");
 	if (searchElement) {
-		searchElement.addEventListener("click", search);
+		searchElement.addEventListener("input", (event) => {
+			search(event.target.value);
+		});
+	}
+
+	api().getUsers();
+
+	const addUserForm = document.querySelector("#add-user-form");
+	if (addUserForm) {
+		addUserForm.addEventListener("input", (event) => {
+			event.preventDefault();
+			addUser(addUserForm);
+		});
 	}
 }
 
-const userList = document.getElementById("user-list");
-const search = document.getElementById("search");
-
-// Fetch users from API
-function getUsers() {
-	fetch("http://localhost:3000/users")
-		.then((response) => response.json())
-		.then((users) => {
-			// Display all users on page load
-			displayUsers(users);
-
-			// Search for users on input change
-			search.addEventListener("input", () => {
-				const filteredUsers = users.filter((user) =>
-					user.username
-						.toLowerCase()
-						.includes(search.value.toLowerCase())
-				);
-				displayUsers(filteredUsers);
-			});
-		});
+function api() {
+	return {
+		getUsers: () => fetch("http://localhost:3000/users").then((res) => res.json()),
+		addUser: (user) => axios.post("http://localhost:3000/users", user),
+		deleteUser: (id) => axios.delete(`http://localhost:3000/users/${id}`),
+		updateUser: (id, user) => axios.put(`http://localhost:3000/users/${id}`, user),
+		getUserById: (id) => fetch(`http://localhost:3000/users/${id}`).then((res) => res.json()),
+	};
 }
 
-getUsers();
+async function search(searchValue) {
+	try {
+		const users = await api().getUsers();
+		const filteredUsers = users.filter((user) =>
+			user.username.toLowerCase().includes(searchValue.toLowerCase())
+		);
+
+		displayUsers(filteredUsers);
+	} catch (error) {
+		console.error("Error fetching users:", error);
+	}
+}
 
 // Display a list of users
 function displayUsers(users) {
+
+	const userList = document.getElementById("user-list");
 	// Clear previous list
 	removeEventListeners();
 	userList.innerHTML = "";
@@ -120,28 +96,18 @@ function removeEventListeners() {
 	});
 }
 
-// Add a user
-const addUserForm = document.getElementById("add-user-form");
+function addUser(addUserForm) {
 
-addUserForm.addEventListener("submit", function (event) {
-	event.preventDefault();
-	addUser();
-});
-
-function addUser() {
-	const newUser = {
-		name: document.getElementById("name").value,
-		username: document.getElementById("username").value,
-		email: document.getElementById("email").value,
-		phone: document.getElementById("phone").value,
-		website: document.getElementById("website").value,
-	};
+	const newUser = {};
+	addUserForm.querySelectorAll("input").forEach(function (input) {
+		newUser[input.id] = input.value;
+	});
 
 	axios
 		.post("http://localhost:3000/users", newUser)
 		.then(function (response) {
 			console.log(response.data);
-			getUsers();
+			api().getUsers();
 			addUserForm.reset();
 		})
 		.catch(function (error) {
@@ -155,7 +121,7 @@ function deleteUser(userId) {
 		.delete(`http://localhost:3000/users/${userId}`)
 		.then(function (response) {
 			console.log(response.data);
-			getUsers();
+			api().getUsers();
 		})
 		.catch(function (error) {
 			console.log(error);
@@ -170,24 +136,7 @@ const editUsername = document.getElementById("edit-username");
 const editEmail = document.getElementById("edit-email");
 const editPhone = document.getElementById("edit-phone");
 const editWebsite = document.getElementById("edit-website");
-const cancelEditButton = document.getElementById("cancel-edit");
-
-editForm.addEventListener("submit", function (event) {
-	event.preventDefault();
-	const updatedUser = {
-		name: editName.value,
-		username: editUsername.value,
-		email: editEmail.value,
-		phone: editPhone.value,
-		website: editWebsite.value,
-	};
-	const userId = editForm.getAttribute("data-id");
-	updateUser(userId, updatedUser);
-});
-
-cancelEditButton.addEventListener("click", function () {
-	hideAndEmptyEditForm();
-});
+const cancelEditForm = document.getElementById("cancel-edit");
 
 function showAndFillEditForm(userId) {
 	fetch(`http://localhost:3000/users/${userId}`)
@@ -205,27 +154,53 @@ function showAndFillEditForm(userId) {
 		});
 }
 
-function updateUser(userId, updatedUser) {
+editForm.addEventListener("submit", function (event) {
+	event.preventDefault();
+	const updatedUser = {
+		name: editName.value,
+		username: editUsername.value,
+		email: editEmail.value,
+		phone: editPhone.value,
+		website: editWebsite.value,
+	};
+	const userId = editForm.getAttribute("data-id");
+
 	axios
 		.put(`http://localhost:3000/users/${userId}`, updatedUser)
 		.then(function (response) {
 			console.log(response.data);
-			getUsers();
-			hideAndEmptyEditForm();
 		})
 		.catch(function (error) {
 			console.log(error);
 		});
-}
 
-function hideAndEmptyEditForm() {
-	editName.value = "";
-	editUsername.value = "";
-	editEmail.value = "";
-	editPhone.value = "";
-	editWebsite.value = "";
-	editForm.setAttribute("data-id", "");
+	// Refresh users list
+	api().getUsers();
 
+	// Clear edit form and hide it.
+	// Select all input fields in the edit form and clear their values
+	const inputs = editForm.querySelectorAll("input");
+	inputs.forEach((input) => (input.value = ""));
+
+	// Reset form attributes
+	editForm.removeAttribute("data-id");
+
+	// Hide the form and overlay
 	editForm.style.display = "none";
 	overlay.style.display = "none";
-}
+});
+
+// Clear edit form and hide it.
+cancelEditForm.addEventListener("click", function () {
+
+	// Select all input fields in the edit form and clear their values
+	const inputs = editForm.querySelectorAll("input");
+	inputs.forEach((input) => (input.value = ""));
+
+	// Reset form attributes
+	editForm.removeAttribute("data-id");
+
+	// Hide the form and overlay
+	editForm.style.display = "none";
+	overlay.style.display = "none";
+});
