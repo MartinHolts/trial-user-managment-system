@@ -1,4 +1,4 @@
-// SEARCH, edit user(save, cancel), delete user, add user. 6
+// SEARCH, edit user(save, cancel), DELETE USER, ADD USER. 6
 
 document.addEventListener("DOMContentLoaded", init);
 
@@ -10,7 +10,19 @@ function init() {
 		});
 	}
 
-	api().getUsers();
+	const userList = document.getElementById("user-list");
+	getUsersAndDisplay(userList);
+	if (userList) {
+		userList.addEventListener("click", (event) => {
+			if (event.target.matches("[edit-button-id]")) {
+				const userId = event.target.getAttribute("edit-button-id");
+				showAndFillEditForm(userId);
+			} else if (event.target.matches("[delete-button-id]")) {
+				const userId = event.target.getAttribute("delete-button-id");
+				deleteUser(userId);
+			}
+		});
+	}
 
 	const addUserForm = document.querySelector("#add-user-form");
 	if (addUserForm) {
@@ -44,12 +56,44 @@ async function search(searchValue) {
 	}
 }
 
-// Display a list of users
-function displayUsers(users) {
+async function addUser(addUserForm) {
+	const newUser = {};
+	addUserForm.querySelectorAll("input").forEach(function (input) {
+		newUser[input.id] = input.value;
+	});
 
-	const userList = document.getElementById("user-list");
-	// Clear previous list
-	removeEventListeners();
+	try {
+		response = await api().addUser(newUser);
+		console.log(response.data);
+
+		addUserForm.reset();
+		getUsersAndDisplay();
+	} catch (error) {
+		console.error("Error adding user to database:", error);
+	}
+} a
+
+async function deleteUser(userId) {
+	try {
+		response = await api().deleteUser(userId);
+		console.log(response.data);
+
+		getUsersAndDisplay();
+	} catch (error) {
+		console.error("Error deleting user from database:", error);
+	}
+}
+
+async function getUsersAndDisplay(userList) {
+	try {
+		const users = await api().getUsers();
+		displayUsers(userList, users);
+	} catch (error) {
+		console.error("Error fetching users:", error);
+	}
+}
+
+function displayUsers(userList, users) {
 	userList.innerHTML = "";
 
 	users.forEach((user) => {
@@ -66,66 +110,7 @@ function displayUsers(users) {
 		</div>
 		`;
 		userList.appendChild(li);
-		const editButton = document.querySelector(
-			`[edit-button-id="${user.id}"]`
-		);
-		const deleteButton = document.querySelector(
-			`[delete-button-id="${user.id}"]`
-		);
-
-		editButton.addEventListener("click", function () {
-			showAndFillEditForm(user.id);
-		});
-
-		deleteButton.addEventListener("click", function () {
-			deleteUser(user.id);
-		});
 	});
-}
-
-function removeEventListeners() {
-	const editButtons = document.querySelectorAll("[edit-button-id]");
-	const deleteButtons = document.querySelectorAll("[delete-button-id]");
-
-	editButtons.forEach((editButton) => {
-		editButton.removeEventListener("click", showAndFillEditForm);
-	});
-
-	deleteButtons.forEach((deleteButton) => {
-		deleteButton.removeEventListener("click", deleteUser);
-	});
-}
-
-function addUser(addUserForm) {
-
-	const newUser = {};
-	addUserForm.querySelectorAll("input").forEach(function (input) {
-		newUser[input.id] = input.value;
-	});
-
-	axios
-		.post("http://localhost:3000/users", newUser)
-		.then(function (response) {
-			console.log(response.data);
-			api().getUsers();
-			addUserForm.reset();
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
-}
-
-// Delete a user
-function deleteUser(userId) {
-	axios
-		.delete(`http://localhost:3000/users/${userId}`)
-		.then(function (response) {
-			console.log(response.data);
-			api().getUsers();
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
 }
 
 // Edit a user
@@ -177,10 +162,7 @@ editForm.addEventListener("submit", function (event) {
 	// Refresh users list
 	api().getUsers();
 
-	// Clear edit form and hide it.
-	// Select all input fields in the edit form and clear their values
-	const inputs = editForm.querySelectorAll("input");
-	inputs.forEach((input) => (input.value = ""));
+	editForm.reset();
 
 	// Reset form attributes
 	editForm.removeAttribute("data-id");
@@ -193,9 +175,7 @@ editForm.addEventListener("submit", function (event) {
 // Clear edit form and hide it.
 cancelEditForm.addEventListener("click", function () {
 
-	// Select all input fields in the edit form and clear their values
-	const inputs = editForm.querySelectorAll("input");
-	inputs.forEach((input) => (input.value = ""));
+	editForm.reset();
 
 	// Reset form attributes
 	editForm.removeAttribute("data-id");
