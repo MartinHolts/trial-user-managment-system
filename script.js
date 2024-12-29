@@ -1,4 +1,4 @@
-// SEARCH, edit user(save, cancel), DELETE USER, ADD USER. 6
+// SEARCH, OPEN EDIT USER(save, CANCEL), DELETE USER, ADD USER. 6
 
 document.addEventListener("DOMContentLoaded", init);
 
@@ -11,16 +11,30 @@ function init() {
 	}
 
 	const userList = document.getElementById("user-list");
+	const editForm = document.getElementById("edit-user-form");
+	const overlay = document.getElementById("overlay-for-edit-user-form");
 	getUsersAndDisplay(userList);
 	if (userList) {
 		userList.addEventListener("click", (event) => {
 			if (event.target.matches("[edit-button-id]")) {
 				const userId = event.target.getAttribute("edit-button-id");
-				showAndFillEditForm(userId);
+				showAndFillEditForm(overlay, editForm, userId);
 			} else if (event.target.matches("[delete-button-id]")) {
 				const userId = event.target.getAttribute("delete-button-id");
 				deleteUser(userId);
 			}
+		});
+	}
+
+	editForm.addEventListener("submit", function (event) {
+		event.preventDefault();
+		saveEditForm();
+	});
+
+	const cancelEditForm = document.getElementById("cancel-edit");
+	if (cancelEditForm) {
+		cancelEditForm.addEventListener("click", function () {
+			hideAndEmptyEditForm(editForm, overlay);
 		});
 	}
 
@@ -33,16 +47,6 @@ function init() {
 	}
 }
 
-function api() {
-	return {
-		getUsers: () => fetch("http://localhost:3000/users").then((res) => res.json()),
-		addUser: (user) => axios.post("http://localhost:3000/users", user),
-		deleteUser: (id) => axios.delete(`http://localhost:3000/users/${id}`),
-		updateUser: (id, user) => axios.put(`http://localhost:3000/users/${id}`, user),
-		getUserById: (id) => fetch(`http://localhost:3000/users/${id}`).then((res) => res.json()),
-	};
-}
-
 async function search(searchValue) {
 	try {
 		const users = await api().getUsers();
@@ -53,34 +57,6 @@ async function search(searchValue) {
 		displayUsers(filteredUsers);
 	} catch (error) {
 		console.error("Error fetching users:", error);
-	}
-}
-
-async function addUser(addUserForm) {
-	const newUser = {};
-	addUserForm.querySelectorAll("input").forEach(function (input) {
-		newUser[input.id] = input.value;
-	});
-
-	try {
-		response = await api().addUser(newUser);
-		console.log(response.data);
-
-		addUserForm.reset();
-		getUsersAndDisplay();
-	} catch (error) {
-		console.error("Error adding user to database:", error);
-	}
-} a
-
-async function deleteUser(userId) {
-	try {
-		response = await api().deleteUser(userId);
-		console.log(response.data);
-
-		getUsersAndDisplay();
-	} catch (error) {
-		console.error("Error deleting user from database:", error);
 	}
 }
 
@@ -113,74 +89,96 @@ function displayUsers(userList, users) {
 	});
 }
 
-// Edit a user
-const overlay = document.getElementById("overlay-for-edit-user-form");
-const editForm = document.getElementById("edit-user-form");
-const editName = document.getElementById("edit-name");
-const editUsername = document.getElementById("edit-username");
-const editEmail = document.getElementById("edit-email");
-const editPhone = document.getElementById("edit-phone");
-const editWebsite = document.getElementById("edit-website");
-const cancelEditForm = document.getElementById("cancel-edit");
+async function showAndFillEditForm(overlay, editForm, userId) {
+	try {
+		response = await api().getUserById(userId);
+		console.log(response.data);
 
-function showAndFillEditForm(userId) {
-	fetch(`http://localhost:3000/users/${userId}`)
-		.then((response) => response.json())
-		.then((user) => {
-			overlay.style.display = "block";
-			editForm.style.display = "block";
+		// Show the overlay and form
+		overlay.style.display = "block";
+		editForm.style.display = "block";
 
-			editName.value = user.name;
-			editUsername.value = user.username;
-			editEmail.value = user.email;
-			editPhone.value = user.phone;
-			editWebsite.value = user.website;
-			editForm.setAttribute("data-id", user.id);
+		// Fill editform with data
+		editForm.querySelectorAll("input").forEach(function (inputElement) {
+			if (user[inputElement.name]) {
+				inputElement.value = user[inputElement.name];
+			}
 		});
+
+		editForm.setAttribute("data-id", user.id);
+	} catch (error) {
+		console.error("Error opening and loading edit user data:", error);
+	}
 }
 
-editForm.addEventListener("submit", function (event) {
-	event.preventDefault();
-	const updatedUser = {
-		name: editName.value,
-		username: editUsername.value,
-		email: editEmail.value,
-		phone: editPhone.value,
-		website: editWebsite.value,
+async function saveEditForm() {
+	try {
+		const userInfo = {
+			name: editName.value,
+			username: editUsername.value,
+			email: editEmail.value,
+			phone: editPhone.value,
+			website: editWebsite.value,
+		};
+		const userId = editForm.getAttribute("data-id");
+		response = await api().updateUser(userId, userInfo);
+
+		// Refresh users list
+		getUsersAndDisplay();
+		hideAndEmptyEditForm();
+
+	} catch (error) {
+		console.error("Error updating user info:", error);
+	}
+}
+
+function hideAndEmptyEditForm(editForm, overlay) {
+
+	// Empty input fields
+	editForm.reset();
+
+	// Reset form attributes
+	editForm.removeAttribute("data-id");
+
+	// Hide the form and overlay
+	editForm.style.display = "none";
+	overlay.style.display = "none";
+}
+
+async function deleteUser(userId) {
+	try {
+		response = await api().deleteUser(userId);
+		console.log(response.data);
+
+		getUsersAndDisplay();
+	} catch (error) {
+		console.error("Error deleting user from database:", error);
+	}
+}
+
+async function addUser(addUserForm) {
+	const newUser = {};
+	addUserForm.querySelectorAll("input").forEach(function (inputElement) {
+		newUser[inputElement.id] = inputElement.value;
+	});
+
+	try {
+		response = await api().addUser(newUser);
+		console.log(response.data);
+
+		addUserForm.reset();
+		getUsersAndDisplay();
+	} catch (error) {
+		console.error("Error adding user to database:", error);
+	}
+}
+
+function api() {
+	return {
+		getUsers: () => fetch("http://localhost:3000/users").then((res) => res.json()),
+		addUser: (userInfo) => axios.post("http://localhost:3000/users", userInfo),
+		deleteUser: (userId) => axios.delete(`http://localhost:3000/users/${userId}`),
+		updateUser: (userId, userInfo) => axios.put(`http://localhost:3000/users/${userId}`, userInfo),
+		getUserById: (userId) => fetch(`http://localhost:3000/users/${userId}`).then((res) => res.json()),
 	};
-	const userId = editForm.getAttribute("data-id");
-
-	axios
-		.put(`http://localhost:3000/users/${userId}`, updatedUser)
-		.then(function (response) {
-			console.log(response.data);
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
-
-	// Refresh users list
-	api().getUsers();
-
-	editForm.reset();
-
-	// Reset form attributes
-	editForm.removeAttribute("data-id");
-
-	// Hide the form and overlay
-	editForm.style.display = "none";
-	overlay.style.display = "none";
-});
-
-// Clear edit form and hide it.
-cancelEditForm.addEventListener("click", function () {
-
-	editForm.reset();
-
-	// Reset form attributes
-	editForm.removeAttribute("data-id");
-
-	// Hide the form and overlay
-	editForm.style.display = "none";
-	overlay.style.display = "none";
-});
+}
