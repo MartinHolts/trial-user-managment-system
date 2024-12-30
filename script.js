@@ -1,5 +1,3 @@
-// SEARCH, OPEN EDIT USER(save, CANCEL), DELETE USER, ADD USER. 6
-
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
@@ -11,9 +9,10 @@ function init() {
 	}
 
 	const userList = document.getElementById("user-list");
+	getUsersAndDisplay(userList);
+
 	const editForm = document.getElementById("edit-user-form");
 	const overlay = document.getElementById("overlay-for-edit-user-form");
-	getUsersAndDisplay(userList);
 	if (userList) {
 		userList.addEventListener("click", (event) => {
 			if (event.target.matches("[edit-button-id]")) {
@@ -94,11 +93,9 @@ async function showAndFillEditForm(overlay, editForm, userId) {
 		response = await api().getUserById(userId);
 		console.log(response.data);
 
-		// Show the overlay and form
 		overlay.style.display = "block";
 		editForm.style.display = "block";
 
-		// Fill editform with data
 		editForm.querySelectorAll("input").forEach(function (inputElement) {
 			if (user[inputElement.name]) {
 				inputElement.value = user[inputElement.name];
@@ -123,24 +120,19 @@ async function saveEditForm() {
 		const userId = editForm.getAttribute("data-id");
 		response = await api().updateUser(userId, userInfo);
 
-		// Refresh users list
 		getUsersAndDisplay();
 		hideAndEmptyEditForm();
 
 	} catch (error) {
-		console.error("Error updating user info:", error);
+		console.error("Error saving edit form:", error);
 	}
 }
 
 function hideAndEmptyEditForm(editForm, overlay) {
-
-	// Empty input fields
 	editForm.reset();
 
-	// Reset form attributes
 	editForm.removeAttribute("data-id");
 
-	// Hide the form and overlay
 	editForm.style.display = "none";
 	overlay.style.display = "none";
 }
@@ -159,7 +151,7 @@ async function deleteUser(userId) {
 async function addUser(addUserForm) {
 	const newUser = {};
 	addUserForm.querySelectorAll("input").forEach(function (inputElement) {
-		newUser[inputElement.id] = inputElement.value;
+		newUser[inputElement.name] = inputElement.value;
 	});
 
 	try {
