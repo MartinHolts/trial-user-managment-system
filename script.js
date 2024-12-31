@@ -2,13 +2,13 @@ document.addEventListener("DOMContentLoaded", init);
 
 function init() {
 	const searchElement = document.querySelector("#search");
+	const userList = document.getElementById("user-list");
 	if (searchElement) {
 		searchElement.addEventListener("input", function (event) {
-			search(event.target.value);
+			search(userList, event.target.value);
 		});
 	}
 
-	const userList = document.getElementById("user-list");
 	getUsersAndDisplay(userList);
 
 	const editForm = document.getElementById("edit-user-form");
@@ -46,16 +46,16 @@ function init() {
 	}
 }
 
-async function search(searchValue) {
+async function search(userList, searchValue) {
 	try {
-		const users = await api().getUsers();
-		const filteredUsers = users.filter(function (user) {
+		const allUsers = await api().getUsers();
+		const users = allUsers.filter(function (user) {
 			return user.username.toLowerCase().includes(searchValue.toLowerCase());
 		});
 
-		displayUsers(filteredUsers);
+		displayUsers(userList, users);
 	} catch (error) {
-		console.error("Error fetching users:", error);
+		console.error("Error fetching users for search:", error);
 	}
 }
 
